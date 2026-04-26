@@ -4,27 +4,17 @@ from colorama import Fore, Back, Style
 from random import choice
 
 logo = """
-╭━━╮╱╱╱╱╱╭╮╱╱╱╭━━━╮╱╱╱╱╱╱╱╱╱╱╭╮
-╰┫┣╯╱╱╱╱╭╯╰╮╱╱┃╭━╮┃╱╱╱╱╱╱╱╱╱╭╯╰╮
-╱┃┃╭━╮╭━┻╮╭╋━━┫╰━╯┣━━┳━━┳━━┳┻╮╭╋━━┳━╮
-╱┃┃┃╭╮┫━━┫┃┃╭╮┃╭╮╭┫┃━┫╭╮┃╭╮┃╭┫┃┃┃━┫╭╯
-╭┫┣┫┃┃┣━━┃╰┫╭╮┃┃┃╰┫┃━┫╰╯┃╰╯┃┃┃╰┫┃━┫┃
-╰━━┻╯╰┻━━┻━┻╯╰┻╯╰━┻━━┫╭━┻━━┻╯╰━┻━━┻╯
-╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱┃┃
-╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰╯"""
-
-urls = [
-    "GitHub - https://github.com/muneebwanee",
-    "Instagram - https://instagram.com/muneebwanee",
-    "Facebook - https://fb.com/muneebwane",
-    "Twitter - https://twitter.com/muneebwanee",
-    "InstaReporter Tool - https://github.com/muneebwanee/InstaReporter",
-    "Gmail - mailto:muneebwanee@gmail.com"
-    ]
+  _____           _         _____                               _               
+ |_   _|         | |       |  __ \                             | |              
+   | |  _ __  ___| |_ __ _ | |__) |___ _ __   ___  _ __| |_ ___ _ __ 
+   | | | '_ \/ __| __/ _` ||  _  // _ \ '_ \ / _ \| '__| __/ _ \ '__|
+  _| |_| | | \__ \ || (_| || | \ \  __/ |_) | (_) | |  | ||  __/ |   
+ |_____|_| |_|___/\__\__,_||_|  \_\___| .__/ \___/|_|   \__\___|_|   
+                                      | |                             
+                                      |_|                             """
 
 def print_logo():
-    print(Fore.RED + Style.BRIGHT + logo + Style.RESET_ALL + Style.BRIGHT +"\n")
-    print(Fore.MAGENTA + "      Producer: Muneeb"+ Style.RESET_ALL + Style.BRIGHT)
-    print(Fore.CYAN + "\n", "-> Follow me On Instagram @muneebwanee.")
-    print ("\n", "-> Special For Hackers:\n    " + choice(urls))
-    print(Style.RESET_ALL + Style.BRIGHT, Style.BRIGHT)
+    print(Fore.CYAN + Style.BRIGHT + logo + Style.RESET_ALL + Style.BRIGHT +"\n")
+    print(Fore.YELLOW + "      Instagram Account Reporter Tool by rhyugen" + Style.RESET_ALL + Style.BRIGHT)
+    print(Fore.GREEN + "\n      Modified and maintained by rhyugen")
+    print(Style.RESET_ALL + Style.BRIGHT)

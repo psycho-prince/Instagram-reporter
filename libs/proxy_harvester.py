@@ -1,43 +1,46 @@
-# coding=utf-8  
-#!/usr/bin/env python3  
-  
-import asyncio  
-from proxybroker import Broker  
-from requests import get  
-  
-from libs.utils import print_success  
-from libs.utils import print_error  
-from libs.utils import ask_question  
-from libs.utils import print_status  
-  
-async def show(proxies, proxy_list):  
-    while (len(proxy_list) < 50):  
-        proxy = await proxies.get()  
-        if proxy is None: break  
-  
-        print_success("[" + str(len(proxy_list) + 1) + "/50]", "Proxy found:", proxy.as_json()["host"] + ":" + str(proxy.as_json()["port"]))  
-          
-        proxy_list.append(  
-            proxy.as_json()["host"] + ":" + str(proxy.as_json()["port"])  
-        )  
-  
-        pass  
-    pass  
-  
-  
-def find_proxies():  
-    proxy_list = []  
-    proxies = asyncio.Queue()  
-    broker = Broker(proxies)  
-    tasks = asyncio.gather(  
-        broker.find(  
-            types=['HTTPS'], limit=50), show(proxies, proxy_list)  
-        )  
-  
-    loop = asyncio.get_event_loop()  
-    loop.run_until_complete(tasks)  
-      
-    if (len(proxy_list) % 5 != 0 and len(proxy_list) > 5):  
-        proxy_list = proxy_list[:len(proxy_list) - (len(proxy_list) % 5)]  
-  
-    return proxy_list
+# coding=utf-8
+#!/usr/bin/env python3
+
+import requests
+import json
+from libs.utils import print_success, print_error, print_status
+
+def find_proxies():
+    """
+    Fetches high-quality rotating proxies from your Proxifly API.
+    """
+    api_key = "8oeNKZreputk37mjiajRCKkk7BiPQSfZYgpjcm6qnnjz"
+    url = "https://api.proxifly.dev/get-proxy"
+    payload = {
+        "apiKey": api_key,
+        "https": True,
+        "quantity": 50
+    }
+    
+    print_status("Fetching premium proxies...")
+    try:
+        response = requests.post(url, json=payload, timeout=20)
+        if response.status_code == 200:
+            data = response.json()
+            proxy_list = []
+            
+            items = data if isinstance(data, list) else [data]
+            
+            for item in items:
+                if 'proxy' in item:
+                    p = item['proxy'].replace('http://', '').replace('https://', '').replace('socks5://', '')
+                    proxy_list.append(p)
+            
+            # Save to file for reuse
+            with open('proxies.txt', 'w') as f:
+                for p in proxy_list:
+                    f.write(p + '\n')
+            
+            print_success(f"Successfully fetched {len(proxy_list)} premium proxies and saved to 'proxies.txt'.")
+            return proxy_list
+        else:
+            print_error(f"API Error: {response.status_code}")
+            return []
+    except Exception as e:
+        print_error(f"API Connection error: {e}")
+        return []
