@@ -9,7 +9,7 @@ def find_proxies():
     """
     Fetches high-quality rotating proxies from your Proxifly API.
     """
-    api_key = "8oeNKZreputk37mjiajRCKkk7BiPQSfZYgpjcm6qnnjz"
+    api_key = "YOUR_API_KEY_HERE"
     url = "https://api.proxifly.dev/get-proxy"
     payload = {
         "apiKey": api_key,
